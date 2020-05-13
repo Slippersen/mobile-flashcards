@@ -10,6 +10,19 @@ const dummyData: Decks = {
       },
     ],
   },
+  "Deck 2": {
+    title: "Deck 2",
+    questions: [
+      {
+        question: "How are you?",
+        answer: "Not OK",
+      },
+      {
+        question: "How are they?",
+        answer: "Not OK",
+      },
+    ],
+  },
 };
 
 /**
