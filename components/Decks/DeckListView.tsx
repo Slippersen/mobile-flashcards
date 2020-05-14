@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
 import { getDecks } from "../../utils/functions";
-import { Deck, Decks } from "../../types";
+import { Deck } from "../../types";
 
 const styles = StyleSheet.create({
   item: {
