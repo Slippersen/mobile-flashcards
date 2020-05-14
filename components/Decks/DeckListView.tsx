@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
-import { getDecks, saveDeckTitle } from "../../utils/functions";
-import { Deck } from "../../types";
+import { getDecks } from "../../utils/functions";
+import { Deck, Decks } from "../../types";
 
 const styles = StyleSheet.create({
   item: {
@@ -35,7 +35,10 @@ const DeckListView = () => {
   const [decks, setDecks] = useState<Deck[]>([]);
 
   useEffect(() => {
-    setDecks(Object.values(getDecks()));
+    let data: Decks = getDecks();
+    if (data) {
+      setDecks(Object.values(data));
+    }
   }, []);
 
   return (

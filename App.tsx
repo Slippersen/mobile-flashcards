@@ -7,9 +7,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: Constants.statusBarHeight,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    borderTopWidth: 1,
+    borderTopColor: "gray",
   },
 });
 

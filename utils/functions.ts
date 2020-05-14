@@ -23,6 +23,22 @@ const dummyData: Decks = {
       },
     ],
   },
+  "Deck 3": {
+    title: "Deck 3",
+    questions: [],
+  },
+  "Deck 4": {
+    title: "Deck 4",
+    questions: [],
+  },
+  "Deck 5": {
+    title: "Deck 5",
+    questions: [],
+  },
+  "Deck 6": {
+    title: "Deck 6",
+    questions: [],
+  },
 };
 
 /**
