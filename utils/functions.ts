@@ -1,4 +1,7 @@
+import { AsyncStorage } from "react-native";
 import { Decks, Deck, Question } from "../types";
+
+const DECKS_STORAGE_KEY = "mobile-flashcards:decks";
 
 const dummyData: Decks = {
   "Deck 1": {
@@ -46,7 +49,15 @@ const dummyData: Decks = {
  * @returns Decks
  * @description return all of the decks along with their titles, questions and answers
  */
-export const getDecks = (): Decks => {
+export const getDecks = async (): Promise<Decks> => {
+  const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
+  if (decks !== null) {
+    return JSON.parse(decks);
+  } else {
+    // store initial dummy data in AsyncStorage
+    await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData));
+  }
+
   return dummyData;
 };
 
@@ -55,7 +66,13 @@ export const getDecks = (): Decks => {
  * @returns Deck
  * @description take in a single id argument and return the deck associated with that id
  */
-export const getDeck = (id: string): Deck => {
+export const getDeck = async (id: string): Promise<Deck> => {
+  const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
+  if (decks !== null) {
+    const decksObject = JSON.parse(decks);
+    return decksObject[id] || null;
+  }
+
   return dummyData[id];
 };
 
@@ -64,13 +81,17 @@ export const getDeck = (id: string): Deck => {
  * @returns void
  * @description take in a single title argument and add it to the decks
  */
-export const saveDeckTitle = (title: string) => {
+export const saveDeckTitle = async (title: string) => {
+  const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
   let newDeck: Deck = {
     title,
     questions: [],
   };
-
-  dummyData[title] = newDeck;
+  if (decks !== null) {
+    const decksObject = JSON.parse(decks);
+    decksObject[title] = newDeck;
+    await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decksObject));
+  }
 };
 
 /**
@@ -79,6 +100,11 @@ export const saveDeckTitle = (title: string) => {
  * @returns void
  * @description add the card to the list of questions for the deck with the associated title
  */
-export const addCardToDeck = (title: string, card: Question) => {
-  dummyData[title]?.questions.push(card);
+export const addCardToDeck = async (title: string, card: Question) => {
+  const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
+  if (decks !== null) {
+    const decksObject = JSON.parse(decks);
+    decksObject[title].questions.push(card);
+    await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decksObject));
+  }
 };

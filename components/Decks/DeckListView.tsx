@@ -35,10 +35,7 @@ const DeckListView = () => {
   const [decks, setDecks] = useState<Deck[]>([]);
 
   useEffect(() => {
-    let data: Decks = getDecks();
-    if (data) {
-      setDecks(Object.values(data));
-    }
+    getDecks().then((data) => setDecks(Object.values(data)));
   }, []);
 
   return (
