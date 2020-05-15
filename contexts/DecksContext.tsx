@@ -12,7 +12,7 @@ export const DecksProvider = ({ children }: Props) => {
   const [decks, setDecks] = useState<Deck[]>([]);
 
   useEffect(() => {
-    data.getDecks().then((data) => setDecks(Object.values(data)));
+    data.getDecks().then((data) => setDecks(Object.values(data).sort((a, b) => (a.title < b.title ? -1 : 1))));
   }, []);
 
   const saveDeck = (title: string, navigation: any) => {
@@ -21,7 +21,7 @@ export const DecksProvider = ({ children }: Props) => {
         title,
         questions: [],
       };
-      setDecks(decks.concat([newDeck]));
+      setDecks(decks.concat([newDeck]).sort((a, b) => (a.title < b.title ? -1 : 1)));
       navigation.navigate("Deck", { title: newDeck.title, questions: newDeck.questions });
     });
   };
