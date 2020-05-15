@@ -22,7 +22,7 @@ export const DecksProvider = ({ children }: Props) => {
         questions: [],
       };
       setDecks(decks.concat([newDeck]).sort((a, b) => (a.title < b.title ? -1 : 1)));
-      navigation.navigate("Deck", { title: newDeck.title, questions: newDeck.questions });
+      navigation.navigate("Deck", { deck: newDeck });
     });
   };
 
