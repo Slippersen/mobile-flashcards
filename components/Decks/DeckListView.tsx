@@ -34,7 +34,7 @@ const ListItem = ({ deck, navigation }: DeckListItemProps) => {
   return (
     <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("Deck", { title: deck.title, questions: deck.questions })}>
       <Text style={styles.title}>{deck.title}</Text>
-      <Text style={styles.details}>{deck.questions?.length} questions</Text>
+      <Text style={styles.details}>{deck.questions?.length} cards</Text>
     </TouchableOpacity>
   );
 };

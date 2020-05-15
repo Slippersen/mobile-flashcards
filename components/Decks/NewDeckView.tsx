@@ -45,7 +45,7 @@ const NewDeckForm = ({ navigation }: any) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>What is the title of your new deck?</Text>
-      <TextInput style={styles.input} onChangeText={(text) => setNewDeckName(text)} value={newDeckName} />
+      <TextInput style={styles.input} placeholder="New deck title ..." onChangeText={(text) => setNewDeckName(text)} value={newDeckName} />
       <TouchableOpacity style={styles.button} onPress={() => submitNewDeck()}>
         <Text>Submit</Text>
       </TouchableOpacity>
