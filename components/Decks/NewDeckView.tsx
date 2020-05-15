@@ -40,11 +40,16 @@ const NewDeckForm = ({ navigation }: any) => {
   const { saveDeck } = useContext(DecksContext);
   const [newDeckName, setNewDeckName] = useState<string>("");
 
+  const submitNewDeck = () => {
+    saveDeck(newDeckName, navigation);
+    setNewDeckName("");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.header}>What is the title of your new deck?</Text>
       <TextInput style={styles.input} onChangeText={(text) => setNewDeckName(text)} value={newDeckName} />
-      <TouchableOpacity style={styles.button} onPress={() => saveDeck(newDeckName, navigation)}>
+      <TouchableOpacity style={styles.button} onPress={() => submitNewDeck()}>
         <Text>Submit</Text>
       </TouchableOpacity>
     </View>
