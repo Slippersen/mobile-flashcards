@@ -33,9 +33,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// An option to enter in the title for the new deck
-// An option to submit the new deck title
-
 const NewDeckForm = ({ navigation }: any) => {
   const { saveDeck } = useContext(DecksContext);
   const [newDeckName, setNewDeckName] = useState<string>("");
