@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StyleSheet, Text, FlatList, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, FlatList, TouchableOpacity, View } from "react-native";
 import { getDecks } from "../../utils/functions";
 import { Deck } from "../../types";
 import DeckView from "./DeckView";
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "white",
+  },
   item: {
-    backgroundColor: "lightgray",
+    backgroundColor: "azure",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
@@ -42,7 +45,11 @@ const List = ({ navigation }: any) => {
     getDecks().then((data) => setDecks(Object.values(data)));
   }, []);
 
-  return <FlatList data={decks} renderItem={({ item }) => <ListItem deck={item} navigation={navigation} />} keyExtractor={(item) => item.title} />;
+  return (
+    <View style={styles.container}>
+      <FlatList data={decks} renderItem={({ item }) => <ListItem deck={item} navigation={navigation} />} keyExtractor={(item) => item.title} />
+    </View>
+  );
 };
 
 const Stack = createStackNavigator();
@@ -50,7 +57,7 @@ const Stack = createStackNavigator();
 const DeckListView = () => {
   const headerOptions = {
     headerStyle: {
-      backgroundColor: "#fff",
+      backgroundColor: "lightblue",
     },
     headerTintColor: "#000",
     headerTitleStyle: {
