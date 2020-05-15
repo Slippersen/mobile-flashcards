@@ -1,13 +1,41 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React, { useContext } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { Deck } from "../../types";
+import DecksContext from "../../contexts/DecksContext";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-evenly",
+  },
+  header: {
+    fontSize: 32,
+    textAlign: "center",
+  },
+  subHeader: {
+    fontSize: 16,
+    textAlign: "center",
+    color: "gray",
+  },
+  button: {
+    backgroundColor: "azure",
+    borderColor: "lightblue",
+    borderWidth: 1,
+    width: 150,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginVertical: 16,
+    alignItems: "center",
+  },
+  lightblue: {
+    backgroundColor: "lightblue",
+  },
+  link: {
+    color: "red",
+    textAlign: "center",
+    marginVertical: 24,
   },
 });
 
@@ -19,12 +47,27 @@ const styles = StyleSheet.create({
 
 const DeckView = ({ route, navigation }: any) => {
   const { title, questions } = route.params;
+  const { removeDeck } = useContext(DecksContext);
 
   return (
     <View style={styles.container}>
-      <Text>
-        Individual deck view ({title} - {questions?.length})
-      </Text>
+      <View>
+        <Text style={styles.header}>{title}</Text>
+        <Text style={styles.subHeader}>
+          {questions?.length} {questions?.length === 1 ? "card" : "cards"}
+        </Text>
+      </View>
+      <View>
+        <TouchableOpacity style={styles.button} onPress={() => {}}>
+          <Text>Add Card</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.lightblue]} onPress={() => {}}>
+          <Text>Start Quiz</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => removeDeck(title, navigation)}>
+          <Text style={styles.link}>Delete Deck</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };

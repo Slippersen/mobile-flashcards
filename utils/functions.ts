@@ -96,6 +96,20 @@ export const saveDeckTitle = async (title: string) => {
 
 /**
  * @param title: string
+ * @returns void
+ * @description take in a single title argument and removes the corresponding deck from the decks
+ */
+export const deleteDeck = async (title: string) => {
+  const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
+  if (decks !== null) {
+    const decksObject = JSON.parse(decks);
+    delete decksObject[title];
+    await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decksObject));
+  }
+};
+
+/**
+ * @param title: string
  * @param card: Question
  * @returns void
  * @description add the card to the list of questions for the deck with the associated title

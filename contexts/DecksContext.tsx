@@ -26,11 +26,25 @@ export const DecksProvider = ({ children }: Props) => {
     });
   };
 
+  const removeDeck = (title: string, navigation: any) => {
+    data.deleteDeck(title).then(() => {
+      setDecks(
+        decks.filter((deck) => {
+          if (deck.title !== title) {
+            return deck;
+          }
+        }),
+      );
+      navigation.navigate("Decks");
+    });
+  };
+
   return (
     <DecksContext.Provider
       value={{
         decks,
         saveDeck,
+        removeDeck,
       }}>
       {children}
     </DecksContext.Provider>
