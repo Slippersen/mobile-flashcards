@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import { StyleSheet, Text, View, FlatList } from "react-native";
+import { StyleSheet, Text, FlatList, TouchableOpacity } from "react-native";
 import { getDecks } from "../../utils/functions";
 import { Deck } from "../../types";
 import DeckView from "./DeckView";
@@ -28,12 +28,10 @@ interface DeckListItemProps {
 
 const ListItem = ({ deck, navigation }: DeckListItemProps) => {
   return (
-    <View style={styles.item}>
-      <Text style={styles.title} onPress={() => navigation.navigate("Deck", { title: deck.title, questions: deck.questions })}>
-        {deck.title}
-      </Text>
+    <TouchableOpacity style={styles.item} onPress={() => navigation.navigate("Deck", { title: deck.title, questions: deck.questions })}>
+      <Text style={styles.title}>{deck.title}</Text>
       <Text style={styles.details}>{deck.questions?.length} questions</Text>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -50,10 +48,20 @@ const List = ({ navigation }: any) => {
 const Stack = createStackNavigator();
 
 const DeckListView = () => {
+  const headerOptions = {
+    headerStyle: {
+      backgroundColor: "#fff",
+    },
+    headerTintColor: "#000",
+    headerTitleStyle: {
+      fontWeight: "bold",
+    },
+  };
+
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={List} />
-      <Stack.Screen name="Deck" component={DeckView} />
+      <Stack.Screen name="Decks" component={List} options={headerOptions} />
+      <Stack.Screen name="Deck" component={DeckView} options={headerOptions} />
     </Stack.Navigator>
   );
 };
