@@ -46,15 +46,15 @@ const styles = StyleSheet.create({
 // An option to go back: <Button title="Go back" onPress={() => navigation.goBack()} />
 
 const DeckView = ({ route, navigation }: any) => {
-  const { title, questions } = route.params;
+  const { deck } = route.params;
   const { removeDeck } = useContext(DecksContext);
 
   return (
     <View style={styles.container}>
       <View>
-        <Text style={styles.header}>{title}</Text>
+        <Text style={styles.header}>{deck.title}</Text>
         <Text style={styles.subHeader}>
-          {questions?.length} {questions?.length === 1 ? "card" : "cards"}
+          {deck.questions?.length} {deck.questions?.length === 1 ? "card" : "cards"}
         </Text>
       </View>
       <View>
@@ -64,7 +64,7 @@ const DeckView = ({ route, navigation }: any) => {
         <TouchableOpacity style={[styles.button, styles.lightblue]} onPress={() => {}}>
           <Text>Start Quiz</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => removeDeck(title, navigation)}>
+        <TouchableOpacity onPress={() => removeDeck(deck.title, navigation)}>
           <Text style={styles.link}>Delete Deck</Text>
         </TouchableOpacity>
       </View>
