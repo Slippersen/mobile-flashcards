@@ -22,7 +22,7 @@ export const DecksProvider = ({ children }: Props) => {
         questions: [],
       };
       setDecks(decks.concat([newDeck]));
-      navigation.navigate("Decks");
+      navigation.navigate("Deck", { title: newDeck.title, questions: newDeck.questions });
     });
   };
 
