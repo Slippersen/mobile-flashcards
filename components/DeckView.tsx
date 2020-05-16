@@ -58,7 +58,7 @@ const DeckView = ({ route, navigation }: any) => {
         </Text>
       </View>
       <View>
-        <TouchableOpacity style={styles.button} onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("New Card/Question", { deck: deck })}>
           <Text>Add Card</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, styles.lightblue]} onPress={() => {}}>

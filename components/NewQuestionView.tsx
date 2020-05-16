@@ -14,10 +14,12 @@ const styles = StyleSheet.create({
 // An option to enter in the answer
 // An option to submit the new question
 
-const NewQuestionView = () => {
+const NewQuestionView = ({ route, navigation }: any) => {
+  const { deck } = route.params;
+
   return (
     <View style={styles.container}>
-      <Text>New question view</Text>
+      <Text>Add new question to {deck.title}</Text>
     </View>
   );
 };
