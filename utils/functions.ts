@@ -4,43 +4,54 @@ import { Decks, Deck, Question } from "../types";
 const DECKS_STORAGE_KEY = "mobile-flashcards:decks";
 
 const dummyData: Decks = {
-  "Deck 1": {
-    title: "Deck 1",
+  React: {
+    title: "React",
     questions: [
       {
-        question: "How are you?",
-        answer: "OK",
+        question: "Can a React application be written in TypeScript?",
+        answer: "Yes",
       },
     ],
   },
-  "Deck 2": {
-    title: "Deck 2",
+  JavaScript: {
+    title: "JavaScript",
     questions: [
       {
-        question: "How are you?",
-        answer: "Not OK",
+        question: "Is EcmaScript another name for JavaScript?",
+        answer: "Yes",
       },
       {
-        question: "How are they?",
-        answer: "Not OK",
+        question: "Is JavaScript and Java the same?",
+        answer: "No",
       },
     ],
   },
-  "Deck 3": {
-    title: "Deck 3",
-    questions: [],
+  "ASP.NET": {
+    title: "ASP.NET",
+    questions: [
+      {
+        question: "Does ASP.NET have a React-like library?",
+        answer: "Yes (Blazor)",
+      },
+    ],
   },
-  "Deck 4": {
-    title: "Deck 4",
-    questions: [],
+  Golang: {
+    title: "Golang",
+    questions: [
+      {
+        question: "Was Golang (Go) written by Facebook?",
+        answer: "No (by Google)",
+      },
+    ],
   },
-  "Deck 5": {
-    title: "Deck 5",
-    questions: [],
-  },
-  "Deck 6": {
-    title: "Deck 6",
-    questions: [],
+  MATLAB: {
+    title: "MATLAB",
+    questions: [
+      {
+        question: "Is MATLAB used for web development?",
+        answer: "No",
+      },
+    ],
   },
 };
 
