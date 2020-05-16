@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { StyleSheet, Text, FlatList, TouchableOpacity, View } from "react-native";
-import { Deck } from "../../types";
+import { Deck } from "../types";
 import DeckView from "./DeckView";
-import { headerOptions } from "../../constants";
-import DecksContext from "../../contexts/DecksContext";
+import { headerOptions } from "../constants";
+import DecksContext from "../contexts/DecksContext";
 
 const styles = StyleSheet.create({
   container: {

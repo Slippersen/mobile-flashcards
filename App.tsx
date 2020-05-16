@@ -4,8 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 // import Constants from "expo-constants";
 import { DecksProvider } from "./contexts/DecksContext";
-import DeckListView from "./components/Decks/DeckListView";
-import NewDeckView from "./components/Decks/NewDeckView";
+import DeckListView from "./components/DeckListView";
+import NewDeckView from "./components/NewDeckView";
 
 const styles = StyleSheet.create({
   container: {

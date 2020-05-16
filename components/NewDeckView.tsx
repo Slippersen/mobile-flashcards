@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import { StyleSheet, Text, View, TextInput, TouchableOpacity } from "react-native";
-import DecksContext from "../../contexts/DecksContext";
+import DecksContext from "../contexts/DecksContext";
 import { createStackNavigator } from "@react-navigation/stack";
-import { headerOptions } from "../../constants";
+import { headerOptions } from "../constants";
 
 const styles = StyleSheet.create({
   container: {

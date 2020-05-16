@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Deck } from "../../types";
-import DecksContext from "../../contexts/DecksContext";
+import { Deck } from "../types";
+import DecksContext from "../contexts/DecksContext";
 
 const styles = StyleSheet.create({
   container: {
