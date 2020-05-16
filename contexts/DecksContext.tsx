@@ -28,13 +28,7 @@ export const DecksProvider = ({ children }: Props) => {
 
   const removeDeck = (title: string, navigation: any) => {
     data.deleteDeck(title).then(() => {
-      setDecks(
-        decks.filter((deck) => {
-          if (deck.title !== title) {
-            return deck;
-          }
-        }),
-      );
+      setDecks(decks.filter((deck) => deck.title !== title));
       navigation.navigate("Decks");
     });
   };
