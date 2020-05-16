@@ -111,14 +111,17 @@ export const deleteDeck = async (title: string) => {
 /**
  * @param title: string
  * @param card: Question
- * @returns void
+ * @returns Decks
  * @description add the card to the list of questions for the deck with the associated title
  */
-export const addCardToDeck = async (title: string, card: Question) => {
+export const addCardToDeck = async (title: string, card: Question): Promise<Decks> => {
   const decks = await AsyncStorage.getItem(DECKS_STORAGE_KEY);
   if (decks !== null) {
     const decksObject = JSON.parse(decks);
     decksObject[title].questions.push(card);
     await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(decksObject));
+    return decksObject;
   }
+
+  return dummyData;
 };

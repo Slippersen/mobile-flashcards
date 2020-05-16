@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Deck } from "../types";
+import { Deck, Question } from "../types";
 import * as data from "../utils/functions";
 
 const DecksContext = React.createContext<any>(null);
@@ -33,12 +33,25 @@ export const DecksProvider = ({ children }: Props) => {
     });
   };
 
+  const saveCardToDeck = (deck: Deck, question: string, answer: string, navigation: any) => {
+    let q: Question = {
+      question,
+      answer,
+    };
+    data.addCardToDeck(deck.title, q).then((data) => {
+      setDecks(Object.values(data).sort((a, b) => (a.title < b.title ? -1 : 1)));
+      deck.questions.push(q);
+      navigation.navigate("Deck", { deck: deck });
+    });
+  };
+
   return (
     <DecksContext.Provider
       value={{
         decks,
         saveDeck,
         removeDeck,
+        saveCardToDeck,
       }}>
       {children}
     </DecksContext.Provider>
