@@ -39,10 +39,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// An option to enter in the question
-// An option to enter in the answer
-// An option to submit the new question
-
 const NewQuestionView = ({ route, navigation }: any) => {
   const { deck } = route.params;
   const { saveCardToDeck } = useContext(DecksContext);

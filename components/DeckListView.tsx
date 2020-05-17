@@ -4,6 +4,7 @@ import { StyleSheet, Text, FlatList, TouchableOpacity, View } from "react-native
 import { Deck } from "../types";
 import DeckView from "./DeckView";
 import NewQuestionView from "./NewQuestionView";
+import QuizView from "./QuizView";
 import { headerOptions } from "../constants";
 import DecksContext from "../contexts/DecksContext";
 
@@ -58,6 +59,7 @@ const DeckListView = () => {
       <Stack.Screen name="Decks" component={List} options={headerOptions} />
       <Stack.Screen name="Deck" component={DeckView} options={headerOptions} />
       <Stack.Screen name="New Card/Question" component={NewQuestionView} options={headerOptions} />
+      <Stack.Screen name="Quiz" component={QuizView} options={headerOptions} />
     </Stack.Navigator>
   );
 };

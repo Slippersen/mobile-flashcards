@@ -39,12 +39,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// displays the title of the Deck
-// displays the number of cards in the deck
-// displays an option to start a quiz on this specific deck
-// An option to add a new question to the deck
-// An option to go back: <Button title="Go back" onPress={() => navigation.goBack()} />
-
 const DeckView = ({ route, navigation }: any) => {
   const { deck } = route.params;
   const { removeDeck } = useContext(DecksContext);
@@ -61,7 +55,7 @@ const DeckView = ({ route, navigation }: any) => {
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("New Card/Question", { deck: deck })}>
           <Text>Add Card</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.lightblue]} onPress={() => {}}>
+        <TouchableOpacity style={[styles.button, styles.lightblue]} onPress={() => navigation.navigate("Quiz", { deck: deck })}>
           <Text>Start Quiz</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => removeDeck(deck.title, navigation)}>
