@@ -67,9 +67,8 @@ export const getDecks = async (): Promise<Decks> => {
   } else {
     // store initial dummy data in AsyncStorage
     await AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(dummyData));
+    return dummyData;
   }
-
-  return dummyData;
 };
 
 /**
