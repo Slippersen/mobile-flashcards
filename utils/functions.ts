@@ -1,7 +1,8 @@
 import { AsyncStorage } from "react-native";
-import { Decks, Deck, Question } from "../types";
+import { Decks, Deck, Question, QuizResult } from "../types";
 
 const DECKS_STORAGE_KEY = "mobile-flashcards:decks";
+const QUIZRESULTS_STORAGE_KEY = "mobile-flashcards:quizResults";
 
 const dummyData: Decks = {
   React: {
@@ -134,4 +135,25 @@ export const addCardToDeck = async (title: string, card: Question): Promise<Deck
   }
 
   return dummyData;
+};
+
+/**
+ * @param title: string
+ * @returns void
+ * @description take in a single title argument and add it to the decks
+ */
+export const saveQuizResults = async (deckTitle: string, percentage: number) => {
+  const results = await AsyncStorage.getItem(QUIZRESULTS_STORAGE_KEY);
+  let result: QuizResult = {
+    deckTitle,
+    percentage,
+    date: new Date(),
+  };
+  if (results !== null) {
+    const resultsList = JSON.parse(results) as Array<QuizResult>;
+    resultsList.push(result);
+    await AsyncStorage.setItem(QUIZRESULTS_STORAGE_KEY, JSON.stringify(resultsList));
+  } else {
+    await AsyncStorage.setItem(QUIZRESULTS_STORAGE_KEY, JSON.stringify([result]));
+  }
 };

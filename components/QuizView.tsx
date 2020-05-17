@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { saveQuizResults } from "../utils/functions";
 
 const styles = StyleSheet.create({
   container: {
@@ -52,11 +53,37 @@ const QuizView = ({ route, navigation }: any) => {
   const { deck } = route.params;
   const [index, setIndex] = useState<number>(0);
   const [showingAnswer, setShowingAnswer] = useState<boolean>(false);
+  const [correctAnswers, setCorrectAnswers] = useState<number>(0);
+  const [showingSummary, setShowingSummary] = useState<boolean>(false);
 
-  if (!deck.questions[index]) {
+  const goToNextQuestion = (correctGuess: boolean) => {
+    if (correctGuess === true) {
+      setCorrectAnswers(correctAnswers + 1);
+    }
+
+    if (index + 1 === deck.questions.length) {
+      saveQuizResults(deck.title, (correctAnswers / deck.questions.length) * 100);
+      setShowingSummary(true);
+    } else {
+      setIndex(index + 1);
+    }
+  };
+
+  if (deck.questions.length === 0) {
     return (
       <View style={styles.container}>
         <Text style={styles.subHeader}>There are no cards in this deck</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={styles.text}>Go back to deck</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
+  if (showingSummary === true) {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>Your percentage: {((correctAnswers / deck.questions.length) * 100).toFixed(0)}%</Text>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={styles.text}>Go back to deck</Text>
         </TouchableOpacity>
@@ -70,15 +97,15 @@ const QuizView = ({ route, navigation }: any) => {
         <View>
           <Text style={styles.header}>{deck.questions[index]?.question}</Text>
           <Text style={styles.subHeader}>
-            {index + 1}/{deck.questions?.length}
+            {index + 1}/{deck.questions.length}
           </Text>
         </View>
         <View>
-          <TouchableOpacity style={styles.button} onPress={() => {}}>
-            <Text style={styles.whiteText}>Correct</Text>
+          <TouchableOpacity style={styles.button} onPress={() => goToNextQuestion(true)}>
+            <Text style={styles.whiteText}>I know this!</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.red]} onPress={() => {}}>
-            <Text style={styles.whiteText}>Incorrect</Text>
+          <TouchableOpacity style={[styles.button, styles.red]} onPress={() => goToNextQuestion(false)}>
+            <Text style={styles.whiteText}>I have no idea</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => setShowingAnswer(!showingAnswer)}>
             {!showingAnswer ? <Text style={styles.text}>Show Answer</Text> : <Text style={styles.text}>{deck.questions[index]?.answer} (touch to hide)</Text>}
