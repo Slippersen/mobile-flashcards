@@ -35,19 +35,20 @@ const styles = StyleSheet.create({
     backgroundColor: "red",
     borderColor: "red",
   },
+  azure: {
+    backgroundColor: "azure",
+    borderColor: "lightblue",
+  },
+  lightblue: {
+    backgroundColor: "lightblue",
+    borderColor: "lightblue",
+  },
   text: {
     color: "black",
     textAlign: "center",
     marginVertical: 24,
   },
 });
-
-// displays a card question
-// an option to view the answer (flips the card)
-// a "Correct" button
-// an "Incorrect" button
-// the number of cards left in the quiz
-// Displays the percentage correct once the quiz is complete
 
 const QuizView = ({ route, navigation }: any) => {
   const { deck } = route.params;
@@ -84,9 +85,19 @@ const QuizView = ({ route, navigation }: any) => {
     return (
       <View style={styles.container}>
         <Text style={styles.header}>Your percentage: {((correctAnswers / deck.questions.length) * 100).toFixed(0)}%</Text>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.text}>Go back to deck</Text>
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity
+            style={[styles.button, styles.azure]}
+            onPress={() => {
+              setShowingSummary(false);
+              setIndex(0);
+            }}>
+            <Text>Restart quiz</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.lightblue]} onPress={() => navigation.goBack()}>
+            <Text>Go back to deck</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     );
   }
