@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { saveQuizResults } from "../utils/functions";
+import { saveQuizResults, clearLocalNotification, setLocalNotification } from "../utils/functions";
 
 const styles = StyleSheet.create({
   container: {
@@ -64,7 +64,11 @@ const QuizView = ({ route, navigation }: any) => {
 
     if (index + 1 === deck.questions.length) {
       saveQuizResults(deck.title, (correctAnswers / deck.questions.length) * 100);
-      setShowingSummary(true);
+      // Clear local notification
+      clearLocalNotification().then(() => {
+        setShowingSummary(true);
+        setLocalNotification().then(() => console.log("Notification set"));
+      });
     } else {
       setIndex(index + 1);
     }

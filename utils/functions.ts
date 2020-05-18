@@ -1,8 +1,11 @@
 import { AsyncStorage } from "react-native";
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
 import { Decks, Deck, Question, QuizResult } from "../types";
 
 const DECKS_STORAGE_KEY = "mobile-flashcards:decks";
 const QUIZRESULTS_STORAGE_KEY = "mobile-flashcards:quizResults";
+const NOTIFICATIONS_KEY = "mobile-flashcards:notifications";
 
 const dummyData: Decks = {
   React: {
@@ -155,5 +158,51 @@ export const saveQuizResults = async (deckTitle: string, percentage: number) => 
     await AsyncStorage.setItem(QUIZRESULTS_STORAGE_KEY, JSON.stringify(resultsList));
   } else {
     await AsyncStorage.setItem(QUIZRESULTS_STORAGE_KEY, JSON.stringify([result]));
+  }
+};
+
+export const clearLocalNotification = async () => {
+  await AsyncStorage.removeItem(NOTIFICATIONS_KEY);
+  Notifications.cancelAllScheduledNotificationsAsync();
+  console.log("Cleared notifications");
+};
+
+export const createNotification = () => {
+  return {
+    title: "Do a quiz!",
+    body: "👋 Do not forget to complete a quiz today!",
+    ios: {
+      sound: true,
+    },
+    android: {
+      sound: true,
+      priority: "high",
+      sticky: false,
+      vibrate: true,
+    },
+  };
+};
+
+export const setLocalNotification = async () => {
+  const notifications = await AsyncStorage.getItem(NOTIFICATIONS_KEY);
+  if (notifications === null) {
+    // const notificationsObject = JSON.parse(notifications);
+    Permissions.askAsync(Permissions.NOTIFICATIONS).then(({ status }: any) => {
+      if (status === "granted") {
+        Notifications.cancelAllScheduledNotificationsAsync();
+
+        let tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(20);
+        tomorrow.setMinutes(0);
+
+        Notifications.scheduleLocalNotificationAsync(createNotification(), {
+          time: tomorrow,
+          repeat: "day",
+        });
+
+        AsyncStorage.setItem(NOTIFICATIONS_KEY, JSON.stringify(true));
+      }
+    });
   }
 };
