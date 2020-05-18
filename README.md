@@ -4,7 +4,9 @@
 
 This "Mobile Flashcards" project is a react native app that allows users to study collections of flashcards. The app will allow users to create different categories of flashcards called "decks", add flashcards to those decks, then take quizzes on those decks.
 
-This project was bootstrapped with [Create React Native App](https://github.com/expo/create-react-native-app)
+The app has only been tested on Android using a physical Pixel 3 device.
+
+This project was bootstrapped with [Create React Native App](https://github.com/expo/create-react-native-app).
 
 To run this project:
 
